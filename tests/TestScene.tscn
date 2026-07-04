@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dtc8jxp8mhtdh"]
+
+[ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/icon.svg" id="1_3hrl3"]
+[ext_resource type="PackedScene" uid="uid://pyko66saur7i" path="res://generic_systems/InventorySystem/InventoryComponent.tscn" id="2_4lxj7"]
+[ext_resource type="PackedScene" uid="uid://crug6qa6iky2h" path="res://generic_systems/HealthComponent/HealthComponent.tscn" id="3_2huul"]
+[ext_resource type="Script" uid="uid://dgdy76ouxixa8" path="res://generic_systems/InventorySystem/InventorySlot.gd" id="3_8v1k4"]
+[ext_resource type="Resource" uid="uid://bvmclqjjoj3vc" path="res://tests/inventorySystem/SwordItem.tres" id="4_xdg1e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh280"]
+size = Vector2(125, 127)
+
+[sub_resource type="Resource" id="Resource_ohf2y"]
+resource_local_to_scene = true
+script = ExtResource("3_8v1k4")
+quantity = 1
+item = ExtResource("4_xdg1e")
+metadata/_custom_type_script = "uid://dgdy76ouxixa8"
+
+[node name="TestScene" type="Node2D" unique_id=681866511]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=413123963]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1269026731]
+texture = ExtResource("1_3hrl3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1911636311]
+position = Vector2(-1.5, -0.5)
+shape = SubResource("RectangleShape2D_lh280")
+
+[node name="InventoryComponent" parent="CharacterBody2D" unique_id=2135248304 instance=ExtResource("2_4lxj7")]
+slots = Array[ExtResource("3_8v1k4")]([SubResource("Resource_ohf2y")])
+
+[node name="HealthComponent" parent="CharacterBody2D" unique_id=355069222 instance=ExtResource("3_2huul")]

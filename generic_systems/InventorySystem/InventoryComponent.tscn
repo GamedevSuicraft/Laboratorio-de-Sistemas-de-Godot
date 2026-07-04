@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://pyko66saur7i"]
+
+[ext_resource type="Script" uid="uid://bc80bkpwxppgl" path="res://generic_systems/InventorySystem/InventoryComponent.gd" id="1_kna0d"]
+
+[node name="InventoryComponent" type="Node" unique_id=2135248304]
+script = ExtResource("1_kna0d")

@@ -6,7 +6,7 @@ signal effect_expired(effect_id: String)
 signal effect_ticked(effect_id: String)
 
 
-var active_effects: Array = []
+var active_effects: Array[StatusEffect] = []
 
 
 func add_effect(effect: StatusEffect):
