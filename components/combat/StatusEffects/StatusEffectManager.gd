@@ -1,11 +1,9 @@
 @icon("./status_effect.svg")
 class_name StatusEffectManager extends Node
 
-
 signal effect_applied(effect_id: String)
 signal effect_expired(effect_id: String)
 signal effect_ticked(effect_id: String)
-
 
 var active_effects: Array[StatusEffect] = []
 
@@ -30,7 +28,7 @@ func _process(delta: float) -> void:
 		# trigger status effect after tick rate
 		if effect_data.last_tick >= effect_data.resource.tick_rate:
 			effect_ticked.emit(effect_data.resource.effect_id)
-			effect_data.last_tick = 0
+			effect_data.last_tick -= effect_data.tick_rate
 		
 		# remove effect after total time ends
 		if effect_data.time_left <= 0:

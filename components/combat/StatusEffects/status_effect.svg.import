@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bss6wvxxofvj8"
-path="res://.godot/imported/health.svg-06874d0be90163a04b66f0a3c1d3febe.ctex"
+uid="uid://c4bdbxdagcwnk"
+path="res://.godot/imported/status_effect.svg-eef6853161e6947dbac54ef29b961c71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/stats/HealthComponent/health.svg"
-dest_files=["res://.godot/imported/health.svg-06874d0be90163a04b66f0a3c1d3febe.ctex"]
+source_file="res://components/combat/StatusEffects/status_effect.svg"
+dest_files=["res://.godot/imported/status_effect.svg-eef6853161e6947dbac54ef29b961c71.ctex"]
 
 [params]
 
