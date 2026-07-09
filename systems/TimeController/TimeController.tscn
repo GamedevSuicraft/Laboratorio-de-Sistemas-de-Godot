@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cosrrkcrmix7k"]
+
+[ext_resource type="Script" uid="uid://cns3qd8l2ddkw" path="res://systems/TimeController/TimeController.gd" id="1_knrd3"]
+
+[node name="TimeController" type="Node" unique_id=1618592238]
+script = ExtResource("1_knrd3")

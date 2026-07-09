@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/icon.svg" id="1_3hrl3"]
 [ext_resource type="Script" uid="uid://dn324etjerl1m" path="res://tests/chess.gd" id="3_2huul"]
 [ext_resource type="PackedScene" uid="uid://dgknvb5c4lww6" path="res://tests/player.tscn" id="3_4lxj7"]
+[ext_resource type="PackedScene" uid="uid://cosrrkcrmix7k" path="res://systems/TimeController/TimeController.tscn" id="5_8v1k4"]
 [ext_resource type="PackedScene" uid="uid://bw1tq3s0uuq53" path="res://components/interaction/2D/Interactable2D.tscn" id="9_1ulxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxf6k"]
@@ -67,5 +68,8 @@ scale = Vector2(1.7509888, 0.33747476)
 position = Vector2(-0.48190308, 305.20813)
 scale = Vector2(1.0000004, 1.0000002)
 shape = SubResource("RectangleShape2D_sxf6k")
+
+[node name="TimeController" parent="." unique_id=1618592238 instance=ExtResource("5_8v1k4")]
+debug_time = true
 
 [connection signal="interacted" from="Chess/Interactable" to="Chess" method="_on_interactable_interacted"]
