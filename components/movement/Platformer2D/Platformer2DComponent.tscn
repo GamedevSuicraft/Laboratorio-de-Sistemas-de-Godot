@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d2bbqd4k8drb4"]
+
+[ext_resource type="Script" uid="uid://brurjxwkhi0c" path="res://components/movement/Platformer2D/Platformer2DComponent.gd" id="1_adbom"]
+
+[node name="Platformer2DComponent" type="Node" unique_id=1594160203]
+script = ExtResource("1_adbom")
