@@ -1,7 +1,7 @@
 class_name VelocityComponent3D extends Node
 
 @export var speed: float = 10.0
-@export var jump_velocity: float = 800
+@export var jump_velocity: float = 5.0
 @export var gravity_multiplier: float = 1.0
 
 

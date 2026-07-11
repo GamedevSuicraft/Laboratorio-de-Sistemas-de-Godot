@@ -3,4 +3,7 @@
 [ext_resource type="Script" uid="uid://c2cngomx4q72k" path="res://components/interaction/2D/Interactor2D.gd" id="1_x7jy6"]
 
 [node name="Interactor2D" type="RayCast2D" unique_id=309487755]
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 script = ExtResource("1_x7jy6")

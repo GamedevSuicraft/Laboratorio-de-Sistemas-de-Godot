@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlh1usi5c3clc"]
 
-[ext_resource type="Script" uid="uid://dn324etjerl1m" path="res://tests/chess.gd" id="1_umyg8"]
-[ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/icon.svg" id="2_r63yx"]
+[ext_resource type="Script" uid="uid://dn324etjerl1m" path="res://tests/2d test/chess.gd" id="1_umyg8"]
+[ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/svg/icon.svg" id="2_r63yx"]
 [ext_resource type="PackedScene" uid="uid://bw1tq3s0uuq53" path="res://components/interaction/2D/Interactable2D.tscn" id="3_n2yw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxf6k"]

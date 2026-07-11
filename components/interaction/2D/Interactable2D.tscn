@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://gnqe77ju8xbc" path="res://components/interaction/2D/Interactable2D.gd" id="1_82v6v"]
 
 [node name="Interactable" type="Area2D" unique_id=1777145814 groups=["Interactable"]]
+monitoring = false
 script = ExtResource("1_82v6v")

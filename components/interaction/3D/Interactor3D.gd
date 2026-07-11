@@ -21,5 +21,5 @@ func _process(_delta: float) -> void:
 
 
 func try_interaction(player: Node):
-	if _current_focus is Interactable3D:
+	if _current_focus and _current_focus is Interactable3D:
 		_current_focus.request_interaction(player)
