@@ -1,3 +1,4 @@
+@icon("./spawner.svg")
 class_name Spawner3D extends Area3D
 
 @export_group("Spawn Settings")

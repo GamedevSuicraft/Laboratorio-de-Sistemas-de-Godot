@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://dtc8jxp8mhtdh"]
 
 [ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/icon.svg" id="1_3hrl3"]
+[ext_resource type="PackedScene" uid="uid://cih5f5uk5aism" path="res://systems/CameraController/PlatformerCameraSmoothing/SmoothCamera.tscn" id="3_2huul"]
 [ext_resource type="PackedScene" uid="uid://dgknvb5c4lww6" path="res://tests/player.tscn" id="3_4lxj7"]
-[ext_resource type="PackedScene" uid="uid://dlh1usi5c3clc" path="res://tests/chess.tscn" id="3_8v1k4"]
-[ext_resource type="PackedScene" uid="uid://c7nlqylvl5k1k" path="res://systems/Spawner/Spawner2D.tscn" id="5_xdg1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxf6k"]
-size = Vector2(126.96385, 750)
+size = Vector2(647.3963, 750)
 
 [node name="TestScene" type="Node2D" unique_id=681866511]
 
 [node name="Player" parent="." unique_id=634229271 instance=ExtResource("3_4lxj7")]
-position = Vector2(331, 413)
+position = Vector2(322, 477)
+speed = 500.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1484478081]
 position = Vector2(51.999985, -18.000002)
@@ -43,20 +43,17 @@ position = Vector2(421, 591.00006)
 scale = Vector2(6.75099, 0.13747592)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3" unique_id=266003667]
-position = Vector2(0, 309.5)
-scale = Vector2(1, 5.8359375)
+position = Vector2(-259.14252, 309.5)
+scale = Vector2(5.0491014, 5.8359375)
 texture = ExtResource("1_3hrl3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1513805756]
-position = Vector2(0, 310)
+position = Vector2(-260.21622, 310)
+scale = Vector2(1, 0.9999998)
 shape = SubResource("RectangleShape2D_sxf6k")
 
-[node name="Spawner2D" parent="." unique_id=232760707 node_paths=PackedStringArray("spawn_shape") instance=ExtResource("5_xdg1e")]
-position = Vector2(632, 356)
-scene_to_spawn = ExtResource("3_8v1k4")
-max_units = 100
-respawn_time = 0.01
-spawn_shape = NodePath("CollisionPolygon2D")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spawner2D" unique_id=1689032485]
-polygon = PackedVector2Array(225, -320, 225, 149, -448, 147, -463, -322, -444, -318, -437, 121, 196, 129, 197, -320)
+[node name="SmoothCamera" parent="." unique_id=1495776510 node_paths=PackedStringArray("target") instance=ExtResource("3_2huul")]
+position = Vector2(319, 480)
+zoom = Vector2(0.5, 0.5)
+target = NodePath("../Player")
+show_debug_visuals = true

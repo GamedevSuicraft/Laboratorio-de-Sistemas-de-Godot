@@ -18,9 +18,8 @@ quantity = 1
 item = ExtResource("5_cn4cn")
 metadata/_custom_type_script = "uid://dgdy76ouxixa8"
 
-[node name="Player" type="CharacterBody2D" unique_id=634229271 node_paths=PackedStringArray("health", "inventory", "movement", "interactor")]
+[node name="Player" type="CharacterBody2D" unique_id=634229271 node_paths=PackedStringArray("inventory", "movement", "interactor")]
 script = ExtResource("1_w74j5")
-health = NodePath("")
 inventory = NodePath("InventoryComponent")
 movement = NodePath("Platformer2DComponent")
 interactor = NodePath("Interactor2D")
@@ -38,7 +37,7 @@ slots = Array[ExtResource("4_ru8lt")]([SubResource("Resource_w74j5")])
 
 [node name="Platformer2DComponent" parent="." unique_id=1594160203 instance=ExtResource("7_irqq7")]
 unique_name_in_owner = true
-jump_velocity = -400.0
+jump_velocity = 400.0
 
 [node name="Interactor2D" parent="." unique_id=309487755 instance=ExtResource("8_xxxkg")]
 hit_from_inside = true

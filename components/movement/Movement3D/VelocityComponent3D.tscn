@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://csnqxrc8mlvaq"]
 
+[ext_resource type="Script" uid="uid://je11ulq18801" path="res://components/movement/Movement3D/VelocityComponent3D.gd" id="1_7t84t"]
+
 [node name="VelocityComponent3d" type="Node" unique_id=1731084662]
+script = ExtResource("1_7t84t")

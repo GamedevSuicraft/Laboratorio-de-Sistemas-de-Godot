@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cih5f5uk5aism"]
+
+[ext_resource type="Script" uid="uid://cr5beba285sd1" path="res://systems/CameraController/PlatformerCameraSmoothing/SmoothCamera.gd" id="1_8qcf3"]
+
+[node name="SmoothCamera" type="Camera2D" unique_id=1495776510]
+script = ExtResource("1_8qcf3")
