@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export_group("Player Components")
-@export var health: HealthComponent
 @export var inventory: InventoryComponent
 @export var movement: Platformer2DComponent
 @export var interactor: Interactor2D

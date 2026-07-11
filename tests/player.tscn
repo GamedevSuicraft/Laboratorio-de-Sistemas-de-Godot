@@ -5,14 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://pyko66saur7i" path="res://components/inventory/InventoryComponent.tscn" id="3_tnexe"]
 [ext_resource type="Script" uid="uid://dgdy76ouxixa8" path="res://components/inventory/InventorySlot.gd" id="4_ru8lt"]
 [ext_resource type="Resource" uid="uid://bvmclqjjoj3vc" path="res://tests/inventorySystem/SwordItem.tres" id="5_cn4cn"]
-[ext_resource type="PackedScene" uid="uid://crug6qa6iky2h" path="res://components/stats/HealthComponent/HealthComponent.tscn" id="6_bkqyd"]
 [ext_resource type="PackedScene" uid="uid://d2bbqd4k8drb4" path="res://components/movement/Platformer2D/Platformer2DComponent.tscn" id="7_irqq7"]
 [ext_resource type="PackedScene" uid="uid://d1ll2hvj4mixp" path="res://components/interaction/2D/Interactor2D.tscn" id="8_xxxkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh280"]
 size = Vector2(127, 127)
 
-[sub_resource type="Resource" id="Resource_xxxkg"]
+[sub_resource type="Resource" id="Resource_w74j5"]
 resource_local_to_scene = true
 script = ExtResource("4_ru8lt")
 quantity = 1
@@ -21,7 +20,7 @@ metadata/_custom_type_script = "uid://dgdy76ouxixa8"
 
 [node name="Player" type="CharacterBody2D" unique_id=634229271 node_paths=PackedStringArray("health", "inventory", "movement", "interactor")]
 script = ExtResource("1_w74j5")
-health = NodePath("HealthComponent")
+health = NodePath("")
 inventory = NodePath("InventoryComponent")
 movement = NodePath("Platformer2DComponent")
 interactor = NodePath("Interactor2D")
@@ -35,10 +34,7 @@ shape = SubResource("RectangleShape2D_lh280")
 
 [node name="InventoryComponent" parent="." unique_id=2135248304 instance=ExtResource("3_tnexe")]
 unique_name_in_owner = true
-slots = Array[ExtResource("4_ru8lt")]([SubResource("Resource_xxxkg")])
-
-[node name="HealthComponent" parent="." unique_id=355069222 instance=ExtResource("6_bkqyd")]
-unique_name_in_owner = true
+slots = Array[ExtResource("4_ru8lt")]([SubResource("Resource_w74j5")])
 
 [node name="Platformer2DComponent" parent="." unique_id=1594160203 instance=ExtResource("7_irqq7")]
 unique_name_in_owner = true

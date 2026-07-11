@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/icon.svg" id="1_3hrl3"]
 [ext_resource type="PackedScene" uid="uid://dgknvb5c4lww6" path="res://tests/player.tscn" id="3_4lxj7"]
 [ext_resource type="PackedScene" uid="uid://dlh1usi5c3clc" path="res://tests/chess.tscn" id="3_8v1k4"]
+[ext_resource type="PackedScene" uid="uid://cosrrkcrmix7k" path="res://systems/TimeController/TimeController.tscn" id="5_8v1k4"]
 [ext_resource type="PackedScene" uid="uid://c7nlqylvl5k1k" path="res://systems/Spawner/Spawner2D.tscn" id="5_xdg1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxf6k"]
@@ -51,12 +52,12 @@ texture = ExtResource("1_3hrl3")
 position = Vector2(0, 310)
 shape = SubResource("RectangleShape2D_sxf6k")
 
-[node name="Spawner2D" parent="." unique_id=232760707 node_paths=PackedStringArray("spawn_shape") instance=ExtResource("5_xdg1e")]
-position = Vector2(632, 356)
-scene_to_spawn = ExtResource("3_8v1k4")
-max_units = 100
-respawn_time = 0.01
-spawn_shape = NodePath("CollisionPolygon2D")
+[node name="Chess" parent="." unique_id=1464808965 instance=ExtResource("3_8v1k4")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spawner2D" unique_id=1689032485]
-polygon = PackedVector2Array(225, -320, 225, 149, -448, 147, -463, -322, -444, -318, -437, 121, 196, 129, 197, -320)
+[node name="TimeController" parent="." unique_id=1618592238 instance=ExtResource("5_8v1k4")]
+debug_time = true
+
+[node name="Spawner2D" parent="." unique_id=232760707 instance=ExtResource("5_xdg1e")]
+position = Vector2(630, 267)
+scene_to_spawn = ExtResource("3_8v1k4")
+spawn_radius = 500.0
