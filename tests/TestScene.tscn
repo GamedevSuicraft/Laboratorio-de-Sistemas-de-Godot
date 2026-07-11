@@ -11,7 +11,6 @@ size = Vector2(647.3963, 750)
 
 [node name="Player" parent="." unique_id=634229271 instance=ExtResource("3_4lxj7")]
 position = Vector2(322, 477)
-speed = 500.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1484478081]
 position = Vector2(51.999985, -18.000002)
@@ -56,4 +55,3 @@ shape = SubResource("RectangleShape2D_sxf6k")
 position = Vector2(319, 480)
 zoom = Vector2(0.5, 0.5)
 target = NodePath("../Player")
-show_debug_visuals = true

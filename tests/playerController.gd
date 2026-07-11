@@ -1,15 +1,9 @@
 extends CharacterBody2D
 
-@export var speed: float = 200
-
 @export_group("References")
 @export var inventory: InventoryComponent
 @export var movement: Platformer2DComponent
 @export var interactor: Interactor2D
-
-
-func _ready() -> void:
-	movement.speed = speed
 
 
 func _physics_process(delta: float) -> void:
