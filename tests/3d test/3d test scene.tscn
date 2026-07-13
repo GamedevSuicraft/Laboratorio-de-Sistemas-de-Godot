@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bgp5o0w2kpma5" path="res://components/interaction/3D/Interactable3D.tscn" id="1_xm2fj"]
 [ext_resource type="PackedScene" uid="uid://csnqxrc8mlvaq" path="res://components/movement/Movement3D/VelocityComponent3D.tscn" id="2_2kl0w"]
 [ext_resource type="Script" uid="uid://b5tv30cyvgx57" path="res://tests/3d test/character_body_3d.gd" id="2_um74l"]
+[ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://assets/shaders/contour.gdshader" id="3_5k6if"]
 [ext_resource type="PackedScene" uid="uid://dnonwwf823k0c" path="res://components/interaction/3D/Interactor3D.tscn" id="4_0k56l"]
 [ext_resource type="Script" uid="uid://bujpvpbt5ert2" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
 
@@ -11,7 +12,17 @@
 albedo_texture = ExtResource("1_xd7hw")
 uv1_scale = Vector3(10, 10, 10)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2uk5l"]
+render_priority = 0
+shader = ExtResource("3_5k6if")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.02
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2kl0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k6if"]
+diffuse_mode = 3
+specular_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_um74l"]
 
@@ -57,7 +68,9 @@ movement = NodePath("VelocityComponent3d")
 interactor = NodePath("Interactor3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=209116591]
+material_overlay = SubResource("ShaderMaterial_2uk5l")
 mesh = SubResource("CapsuleMesh_2kl0w")
+surface_material_override/0 = SubResource("StandardMaterial3D_5k6if")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1148801627]
 shape = SubResource("CapsuleShape3D_um74l")
@@ -69,7 +82,7 @@ gravity_multiplier = 2.0
 [node name="Interactor3D" parent="CharacterBody3D" unique_id=576514282 instance=ExtResource("4_0k56l")]
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1042031389]
-transform = Transform3D(1, 0, 0, 0, 0.8523573, 0.5229598, 0, -0.5229598, 0.8523573, -0.33667016, 2.4463794, 6.4335465)
+transform = Transform3D(1, 0, 0, 0, 0.8523573, 0.5229598, 0, -0.5229598, 0.8523573, -0.33667016, 4.351884, 8.533716)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=772104936]
 environment = SubResource("Environment_xd7hw")
