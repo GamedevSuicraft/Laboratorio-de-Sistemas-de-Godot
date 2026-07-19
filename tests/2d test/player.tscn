@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://pyko66saur7i" path="res://components/inventory/InventoryComponent.tscn" id="3_tnexe"]
 [ext_resource type="Script" uid="uid://dgdy76ouxixa8" path="res://components/inventory/InventorySlot.gd" id="4_ru8lt"]
 [ext_resource type="Resource" uid="uid://bvmclqjjoj3vc" path="res://tests/2d test/inventorySystem/SwordItem.tres" id="5_cn4cn"]
-[ext_resource type="PackedScene" uid="uid://d2bbqd4k8drb4" path="res://components/movement/Platformer2D/Platformer2DComponent.tscn" id="7_irqq7"]
+[ext_resource type="PackedScene" uid="uid://d2bbqd4k8drb4" path="res://components/movement/2D/Platformer/Platformer2DComponent.tscn" id="7_irqq7"]
 [ext_resource type="PackedScene" uid="uid://d1ll2hvj4mixp" path="res://components/interaction/2D/Interactor2D.tscn" id="8_xxxkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh280"]

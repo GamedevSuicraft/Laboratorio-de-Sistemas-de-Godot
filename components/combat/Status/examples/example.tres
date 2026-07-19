@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ExampleStatus" format=3 uid="uid://q8l3xb065fxd"]
+
+[ext_resource type="Script" uid="uid://bj2l77y3evhkk" path="res://components/combat/Status/examples/ExampleStatus.gd" id="1_xjwj7"]
+
+[resource]
+script = ExtResource("1_xjwj7")
+metadata/_custom_type_script = "uid://bj2l77y3evhkk"

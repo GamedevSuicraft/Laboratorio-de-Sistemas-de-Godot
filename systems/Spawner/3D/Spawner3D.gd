@@ -1,7 +1,14 @@
+## Spawns packed 3D scenes within a specified collision shape region periodically or on-demand.
+##
+## To use:
+## 1. Add this Area3D node to a 3D scene.
+## 2. Set 'scene_to_spawn', 'max_units', and 'respawn_time' in the inspector.
+## 3. Reference a CollisionShape3D in 'spawn_shape' to define the boundaries.
 @icon("./spawner.svg")
 class_name Spawner3D extends Area3D
 
 @export_group("Spawn Settings")
+
 ## The PackedScene of the object or enemy that the spawner will instantiate.
 @export var scene_to_spawn: PackedScene
 
@@ -12,6 +19,7 @@ class_name Spawner3D extends Area3D
 @export var respawn_time: float = 5.0
 
 @export_group("References")
+
 ## The node defining the geometric shape of the spawn area (must be a CollisionShape3D).
 @export var spawn_shape: CollisionShape3D
 

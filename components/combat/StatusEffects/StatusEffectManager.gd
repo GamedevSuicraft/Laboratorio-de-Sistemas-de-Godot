@@ -1,3 +1,9 @@
+## Manages active status effects on a character, ticking and expiring them over time.
+##
+## To use:
+## 1. Add this node as a child of a character/combatant.
+## 2. Call add_effect(effect_resource) to apply a StatusEffect.
+## 3. Listen to effect_applied, effect_ticked, and effect_expired signals to execute custom effect logic.
 @icon("./status_effect.svg")
 class_name StatusEffectManager extends Node
 

@@ -1,10 +1,20 @@
+## Tracks in-game time of day, transitioning from 0 to 86400 (seconds in a day).
+##
+## To use:
+## 1. Add this node to the global system or active game scene.
+## 2. Set 'day_duration_minutes' to configure day speed.
+## 3. Listen to the 'time_changed' signal to synchronize lighting, weather, or UI.
 class_name TimeController extends Node
-
 
 const TOTAL_DAY_DURATION: float = 86400.0
 
+## Duration of a full in-game day in real-world minutes.
 @export var day_duration_minutes: float = 10.0
+
+## Toggles console debug logs printing current time.
 @export var debug_time: bool = false
+
+## Initial or current time of day in seconds (from 0 to 86400).
 @export_range(0, TOTAL_DAY_DURATION, 1.0) var time_of_day: float = TOTAL_DAY_DURATION / 2
 
 signal time_changed(current_time: float)

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dtnncs47gb08a"]
+
+[ext_resource type="Script" uid="uid://0j1d54o1tsk" path="res://systems/Camera/3D/ThirdPersonCamera/ThirdPersonCamera.gd" id="1_26hdc"]
+
+[node name="ThirdPersonCamera" type="Node3D" unique_id=2147131112]
+script = ExtResource("1_26hdc")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=2054537874]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=818031434]

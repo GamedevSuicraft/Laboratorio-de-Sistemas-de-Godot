@@ -1,7 +1,14 @@
+## Spawns packed 2D scenes within a specified shape/region periodically or on-demand.
+##
+## To use:
+## 1. Add this Area2D node to a 2D scene.
+## 2. Set 'scene_to_spawn', 'max_units', and 'respawn_time' in the inspector.
+## 3. Reference a CollisionShape2D or CollisionPolygon2D in 'spawn_shape' to define the boundaries.
 @icon("./spawner.svg")
 class_name Spawner2D extends Area2D
 
 @export_group("Spawn Settings")
+
 ## The PackedScene of the object or enemy that the spawner will instantiate.
 @export var scene_to_spawn: PackedScene
 
@@ -12,6 +19,7 @@ class_name Spawner2D extends Area2D
 @export var respawn_time: float = 5.0
 
 @export_group("References")
+
 ## The node defining the geometric shape of the spawn area (can be a CollisionShape2D or CollisionPolygon2D).
 @export var spawn_shape: Node2D
 

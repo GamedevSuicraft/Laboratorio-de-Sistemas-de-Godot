@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bbydv1q3cawb8"]
+[gd_scene format=3 uid="uid://bia3js1wf3fat"]
 
 [ext_resource type="Script" uid="uid://tkbdp3xahdkn" path="res://components/combat/StatusEffects/StatusEffectManager.gd" id="1_gjvyd"]
 

@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://cpy2hpdq7bpdf"]
+
+[ext_resource type="Script" uid="uid://b5tv30cyvgx57" path="res://tests/3d test/character_body_3d.gd" id="1_r3wmj"]
+[ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://assets/shaders/contour.gdshader" id="2_p7nrp"]
+[ext_resource type="Script" uid="uid://d22hs1yfykuqg" path="res://components/movement/3D/Platformer/VelocityComponent3D.gd" id="3_script"]
+[ext_resource type="Script" uid="uid://bcepvku1bq46f" path="res://components/interaction/3D/Interactor3D.gd" id="4_script"]
+[ext_resource type="PackedScene" uid="uid://dtnncs47gb08a" path="res://systems/Camera/3D/ThirdPersonCamera/ThirdPersonCamera.tscn" id="5_lu84o"]
+[ext_resource type="Script" uid="uid://ivtf7ec0c5yd" path="res://components/combat/Status/ResourceComponent.gd" id="6_rblra"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2uk5l"]
+render_priority = 0
+shader = ExtResource("2_p7nrp")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.0400000019
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2kl0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k6if"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1.611794, 1.6179447, 0.9553779, 1)
+metallic = 0.7
+roughness = 0.1
+stencil_flags = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp00h"]
+render_priority = 0
+shader = ExtResource("2_p7nrp")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek6ti"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 1, 0.962128, 1)
+metallic = 0.35
+metallic_specular = 1.0
+texture_filter = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_584mt"]
+material = SubResource("StandardMaterial3D_ek6ti")
+radius = 0.3
+height = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r165k"]
+render_priority = 0
+shader = ExtResource("2_p7nrp")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.0400000019
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh2p4"]
+albedo_color = Color(0.49010885, 0.25766784, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_584mt"]
+material = SubResource("StandardMaterial3D_hh2p4")
+top_radius = 0.4794922
+bottom_radius = 0.4794922
+height = 0.1776123
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_um74l"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=470733278 node_paths=PackedStringArray("movement", "interactor", "camera_pivot", "stamina")]
+script = ExtResource("1_r3wmj")
+movement = NodePath("MovementComponent")
+interactor = NodePath("Interactor")
+camera_pivot = NodePath("Camera")
+stamina = NodePath("Stamina")
+
+[node name="Model" type="Node3D" parent="." unique_id=394858391]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" unique_id=128849785]
+material_overlay = SubResource("ShaderMaterial_2uk5l")
+mesh = SubResource("CapsuleMesh_2kl0w")
+surface_material_override/0 = SubResource("StandardMaterial3D_5k6if")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model" unique_id=1042901754]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.33870554, -0.5)
+material_overlay = SubResource("ShaderMaterial_hp00h")
+mesh = SubResource("CapsuleMesh_584mt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model" unique_id=1675432695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_overlay = SubResource("ShaderMaterial_r165k")
+mesh = SubResource("CylinderMesh_584mt")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=117082352]
+shape = SubResource("CapsuleShape3D_um74l")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1731084662 node_paths=PackedStringArray("movement_reference")]
+script = ExtResource("3_script")
+jump_velocity = 10.0
+gravity_multiplier = 2.0
+movement_reference = NodePath("../Camera")
+
+[node name="Interactor" type="RayCast3D" parent="." unique_id=576514282]
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("4_script")
+
+[node name="Camera" parent="." unique_id=2147131112 node_paths=PackedStringArray("character_model") instance=ExtResource("5_lu84o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6729362, 0)
+min_angle = -0.5
+max_angle = 0.5
+character_model = NodePath("../Model")
+
+[node name="Stamina" type="Node" parent="." unique_id=749622202]
+script = ExtResource("6_rblra")
+regen_rate = 5.0
+debug = true

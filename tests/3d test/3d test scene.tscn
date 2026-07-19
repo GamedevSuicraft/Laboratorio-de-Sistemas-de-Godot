@@ -1,35 +1,30 @@
 [gd_scene format=3 uid="uid://l5nf68m1esmb"]
 
+[ext_resource type="Shader" uid="uid://dnclyexp54fhl" path="res://assets/shaders/basic_skyshader.gdshader" id="1_khnuh"]
 [ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="1_xd7hw"]
-[ext_resource type="PackedScene" uid="uid://bgp5o0w2kpma5" path="res://components/interaction/3D/Interactable3D.tscn" id="1_xm2fj"]
-[ext_resource type="PackedScene" uid="uid://csnqxrc8mlvaq" path="res://components/movement/Movement3D/VelocityComponent3D.tscn" id="2_2kl0w"]
-[ext_resource type="Script" uid="uid://b5tv30cyvgx57" path="res://tests/3d test/character_body_3d.gd" id="2_um74l"]
-[ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://assets/shaders/contour.gdshader" id="3_5k6if"]
-[ext_resource type="PackedScene" uid="uid://dnonwwf823k0c" path="res://components/interaction/3D/Interactor3D.tscn" id="4_0k56l"]
-[ext_resource type="Script" uid="uid://bujpvpbt5ert2" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
+[ext_resource type="Script" path="res://components/interaction/3D/Interactable3D.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cbxy2c3ewfbbh" path="res://assets/textures/fuzzy_sky-blue_03-1024x512.png" id="2_khnuh"]
+[ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
+[ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
+shader = ExtResource("1_khnuh")
+shader_parameter/sky_texture = ExtResource("2_khnuh")
+
+[sub_resource type="Sky" id="Sky_6v3ay"]
+sky_material = SubResource("ShaderMaterial_kkwq4")
+
+[sub_resource type="Environment" id="Environment_xd7hw"]
+background_mode = 2
+background_color = Color(0.9774429, 0.8364514, 0.8644167, 1)
+sky = SubResource("Sky_6v3ay")
+ambient_light_source = 3
+glow_enabled = true
+fog_light_color = Color(0.657358, 0.7846865, 0.9319059, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd7hw"]
 albedo_texture = ExtResource("1_xd7hw")
 uv1_scale = Vector3(10, 10, 10)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2uk5l"]
-render_priority = 0
-shader = ExtResource("3_5k6if")
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 0.02
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2kl0w"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k6if"]
-diffuse_mode = 3
-specular_mode = 1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_um74l"]
-
-[sub_resource type="Environment" id="Environment_xd7hw"]
-background_energy_multiplier = 1.72
-glow_enabled = true
-fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2fj"]
 transparency = 1
@@ -48,47 +43,36 @@ radius = 2.0
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=10388013]
-use_collision = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=533850820]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.869568, 0, -74.13499)
-size = Vector3(151.89001, 1, 197.24242)
-material = SubResource("StandardMaterial3D_xd7hw")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2099782610]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.95084, 0.91134644, -5.7852173)
-size = Vector3(10, 2.8226929, 31.506714)
-material = SubResource("StandardMaterial3D_xd7hw")
-
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1195534142 node_paths=PackedStringArray("movement", "interactor")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7522671, 0)
-script = ExtResource("2_um74l")
-movement = NodePath("VelocityComponent3d")
-interactor = NodePath("Interactor3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=209116591]
-material_overlay = SubResource("ShaderMaterial_2uk5l")
-mesh = SubResource("CapsuleMesh_2kl0w")
-surface_material_override/0 = SubResource("StandardMaterial3D_5k6if")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1148801627]
-shape = SubResource("CapsuleShape3D_um74l")
-
-[node name="VelocityComponent3d" parent="CharacterBody3D" unique_id=1731084662 instance=ExtResource("2_2kl0w")]
-jump_velocity = 10.0
-gravity_multiplier = 2.0
-
-[node name="Interactor3D" parent="CharacterBody3D" unique_id=576514282 instance=ExtResource("4_0k56l")]
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1042031389]
-transform = Transform3D(1, 0, 0, 0, 0.8523573, 0.5229598, 0, -0.5229598, 0.8523573, -0.33667016, 4.351884, 8.533716)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=772104936]
 environment = SubResource("Environment_xd7hw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1717799561]
-transform = Transform3D(-0.053561524, -0.80842155, 0.58616185, -0.073564395, 0.5886039, 0.8050675, -0.9958511, 0, -0.09099757, 0, 4.073457, 0)
+transform = Transform3D(-0.053561524, -0.8084216, 0.5861619, -0.073564395, 0.588604, 0.80506754, -0.9958511, 0, -0.09099758, 0, 4.073457, 0)
+
+[node name="Level" type="CSGCombiner3D" parent="." unique_id=10388013]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level" unique_id=533850820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.869568, 0, -74.13499)
+size = Vector3(151.89001, 1, 197.24242)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level" unique_id=2099782610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.95084, 0.91134644, -5.7852173)
+size = Vector3(10, 2.8226929, 31.506714)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level" unique_id=70381534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.106113, 4.1677837, -0.29877377)
+size = Vector3(10, 1.1164246, 17.719177)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CharacterBody3D" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61112714, 1.7672446, 0.9762392)
 
 [node name="Node3D" type="Node3D" parent="." unique_id=735676089]
 script = ExtResource("5_khnuh")
@@ -97,7 +81,9 @@ script = ExtResource("5_khnuh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
 mesh = SubResource("CylinderMesh_khnuh")
 
-[node name="Interactable" parent="Node3D" unique_id=1919765328 instance=ExtResource("1_xm2fj")]
+[node name="Interactable" type="Area3D" parent="Node3D" unique_id=1919765328]
+script = ExtResource("1_script")
+
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable" unique_id=604717282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)

@@ -1,9 +1,18 @@
+## Node that manages an inventory with item stacking, slot limits, and signals for changes.
+##
+## To use:
+## 1. Add this node as a child of a character, chest, or item container.
+## 2. Configure max_slots in the inspector.
+## 3. Call add_item() or remove_item_from_slot() to manipulate the inventory.
 @icon("./inventory.svg")
 class_name InventoryComponent extends Node
 
 signal inventory_changed
 
+## The maximum number of item slots allowed in this inventory.
 @export var max_slots: int = 10
+
+## The list of current inventory slots populated with items.
 @export var slots: Array[InventorySlot] = []
 
 

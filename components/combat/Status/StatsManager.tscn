@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dq5nvi1jp8mxa"]
-
-[ext_resource type="Script" uid="uid://bm540bflslx28" path="res://components/combat/Status/StatsManager.gd" id="1_wdpim"]
-
-[node name="StatsManager" type="Node" unique_id=2119897926]
-script = ExtResource("1_wdpim")

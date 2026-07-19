@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dtc8jxp8mhtdh"]
 
 [ext_resource type="Texture2D" uid="uid://hcyv6ueti2yx" path="res://assets/svg/icon.svg" id="1_3hrl3"]
-[ext_resource type="PackedScene" uid="uid://cih5f5uk5aism" path="res://systems/CameraController/PlatformerCameraSmoothing/SmoothCamera.tscn" id="3_2huul"]
+[ext_resource type="PackedScene" uid="uid://cih5f5uk5aism" path="res://systems/Camera/2D/PlatformerCameraSmoothing/SmoothCamera.tscn" id="3_2huul"]
 [ext_resource type="PackedScene" uid="uid://dgknvb5c4lww6" path="res://tests/2d test/player.tscn" id="3_4lxj7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxf6k"]

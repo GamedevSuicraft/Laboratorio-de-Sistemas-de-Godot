@@ -1,3 +1,9 @@
+## RayCast3D subclass representing the player's interaction source in 3D space.
+##
+## To use:
+## 1. Add this RayCast3D node to the 3D Player character (typically attached to the head or camera pivot).
+## 2. Call try_interaction(self) when the player presses the interaction key.
+## 3. Listen to focused_interactable and unfocused_interactable signals to update UI prompts.
 class_name Interactor3D extends RayCast3D
 
 signal focused_interactable(node: Node)
