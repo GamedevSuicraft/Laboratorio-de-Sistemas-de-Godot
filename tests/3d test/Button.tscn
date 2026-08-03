@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://njvrqar7g48e"]
+
+[ext_resource type="Script" uid="uid://cegxg01yo4oox" path="res://systems/Button/3D/PressurePlate/PressurePlateLogic.gd" id="1_dwxgs"]
+[ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="2_gjyge"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2uk5l"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3l4m"]
+albedo_color = Color(0.49821353, 0.28982565, 0.20557293, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hp00h"]
+material = SubResource("StandardMaterial3D_j3l4m")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r165k"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c40dr"]
+albedo_texture = ExtResource("2_gjyge")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ek6ti"]
+material = SubResource("StandardMaterial3D_c40dr")
+size = Vector3(2.5, 0.3, 2.5)
+
+[node name="StaticBody3D" type="Node3D" unique_id=1262652029]
+
+[node name="RigidBody3D" type="AnimatableBody3D" parent="." unique_id=772888904]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=994728058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0014006495, 0)
+shape = SubResource("CylinderShape3D_2uk5l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1698664992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0014006495, 0)
+mesh = SubResource("CylinderMesh_hp00h")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2132192617 node_paths=PackedStringArray("target_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11198801, 0)
+script = ExtResource("1_dwxgs")
+target_node = NodePath("../RigidBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1708317946]
+shape = SubResource("CylinderShape3D_r165k")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1030694784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34301114, 0)
+mesh = SubResource("BoxMesh_ek6ti")

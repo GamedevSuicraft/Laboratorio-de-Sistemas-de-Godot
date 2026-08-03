@@ -107,4 +107,3 @@ character_model = NodePath("../Model")
 [node name="Stamina" type="Node" parent="." unique_id=749622202]
 script = ExtResource("6_rblra")
 regen_rate = 5.0
-debug = true

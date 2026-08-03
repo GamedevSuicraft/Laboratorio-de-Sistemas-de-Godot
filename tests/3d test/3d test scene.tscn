@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://l5nf68m1esmb"]
 
 [ext_resource type="Shader" uid="uid://dnclyexp54fhl" path="res://assets/shaders/basic_skyshader.gdshader" id="1_khnuh"]
+[ext_resource type="Script" uid="uid://dvga0ijjjyy4y" path="res://components/interaction/3D/Interactable3D.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="1_xd7hw"]
-[ext_resource type="Script" path="res://components/interaction/3D/Interactable3D.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://cbxy2c3ewfbbh" path="res://assets/textures/fuzzy_sky-blue_03-1024x512.png" id="2_khnuh"]
 [ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
 [ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
+[ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
 shader = ExtResource("1_khnuh")
@@ -84,9 +85,11 @@ mesh = SubResource("CylinderMesh_khnuh")
 [node name="Interactable" type="Area3D" parent="Node3D" unique_id=1919765328]
 script = ExtResource("1_script")
 
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable" unique_id=604717282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
 shape = SubResource("CylinderShape3D_5k6if")
+
+[node name="Button" parent="." unique_id=589067763 instance=ExtResource("7_5k6if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
 
 [connection signal="interacted" from="Node3D/Interactable" to="Node3D" method="_on_interactable_interacted"]

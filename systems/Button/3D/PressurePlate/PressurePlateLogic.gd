@@ -1,4 +1,3 @@
-# Guarde este script como "pressure_plate_logic.gd"
 class_name PressurePlateLogic
 extends Area3D
 
@@ -20,13 +19,13 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-func _on_body_entered(_body: Node3D) -> void:
+func _on_body_entered(_body: CharacterBody3D) -> void:
 	bodies_inside += 1
 	if bodies_inside == 1:
 		_animate(original_position + move_offset)
 		pressed.emit()
 
-func _on_body_exited(_body: Node3D) -> void:
+func _on_body_exited(_body: CharacterBody3D) -> void:
 	bodies_inside -= 1
 	if bodies_inside == 0:
 		_animate(original_position)
