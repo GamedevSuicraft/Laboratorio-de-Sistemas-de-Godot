@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
 [ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
 [ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
-[ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/grayScreen.gdshader" id="8_2uk5l"]
+[ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/post-processing/grayScreen.gdshader" id="8_2uk5l"]
+[ext_resource type="Shader" uid="uid://blcxd3fiterd" path="res://assets/shaders/post-processing/vignette.gdshader" id="9_hp00h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
 shader = ExtResource("1_khnuh")
@@ -43,10 +44,18 @@ height = 4.0
 height = 4.0
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek6ti"]
 shader = ExtResource("8_2uk5l")
-shader_parameter/select_grayscale_math_algorithm = 3
-shader_parameter/binarization_threshold_cutoff = 0.5730000272175
+shader_parameter/select_grayscale_math_algorithm = 2
+shader_parameter/binarization_threshold_cutoff = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l4m"]
+shader = ExtResource("9_hp00h")
+shader_parameter/invert_vignette = false
+shader_parameter/vignette_radius = 0.30000001425
+shader_parameter/vignette_softness = 0.60400002869
+shader_parameter/vignette_aspect_ratio = 1.9000000665
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
 
@@ -100,8 +109,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1599310113]
-material = SubResource("ShaderMaterial_584mt")
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=130882804]
+material = SubResource("ShaderMaterial_ek6ti")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=1146626867]
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1082339680]
+material = SubResource("ShaderMaterial_j3l4m")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
