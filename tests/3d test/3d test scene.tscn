@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
 [ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
 [ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
+[ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/grayScreen.gdshader" id="8_2uk5l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
 shader = ExtResource("1_khnuh")
@@ -41,6 +42,11 @@ height = 4.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5k6if"]
 height = 4.0
 radius = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
+shader = ExtResource("8_2uk5l")
+shader_parameter/select_grayscale_math_algorithm = 3
+shader_parameter/binarization_threshold_cutoff = 0.5730000272175
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
 
@@ -91,5 +97,16 @@ shape = SubResource("CylinderShape3D_5k6if")
 
 [node name="Button" parent="." unique_id=589067763 instance=ExtResource("7_5k6if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1599310113]
+material = SubResource("ShaderMaterial_584mt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="interacted" from="Node3D/Interactable" to="Node3D" method="_on_interactable_interacted"]
