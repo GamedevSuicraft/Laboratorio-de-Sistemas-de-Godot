@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="1_xd7hw"]
 [ext_resource type="Texture2D" uid="uid://cbxy2c3ewfbbh" path="res://assets/textures/fuzzy_sky-blue_03-1024x512.png" id="2_khnuh"]
 [ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
+[ext_resource type="Shader" uid="uid://d2kdvjtrh8ydx" path="res://assets/shaders/desintegration.gdshader" id="4_r165k"]
+[ext_resource type="Script" uid="uid://45dlkvydawkl" path="res://tests/3d test/desintegratingCube.gd" id="5_hh2p4"]
 [ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/node_3d.gd" id="5_khnuh"]
 [ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
 [ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/post-processing/grayScreen.gdshader" id="8_2uk5l"]
@@ -29,6 +31,23 @@ fog_light_color = Color(0.657358, 0.7846865, 0.9319059, 1)
 albedo_texture = ExtResource("1_xd7hw")
 uv1_scale = Vector3(10, 10, 10)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hh2p4"]
+seed = 16
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r165k"]
+noise = SubResource("FastNoiseLite_hh2p4")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
+render_priority = 0
+shader = ExtResource("4_r165k")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_r165k")
+shader_parameter/edge_width = 0.1170000055575
+shader_parameter/edge_color = Color(0.7866053, 0.43492922, 0, 1)
+shader_parameter/emission_energy = 54.930002561675
+shader_parameter/albedo = Color(0.99999994, 0.14666548, 0.14639562, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2fj"]
 transparency = 1
 blend_mode = 1
@@ -52,9 +71,9 @@ shader_parameter/binarization_threshold_cutoff = 0.5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l4m"]
 shader = ExtResource("9_hp00h")
 shader_parameter/invert_vignette = false
-shader_parameter/vignette_radius = 0.30000001425
-shader_parameter/vignette_softness = 0.60400002869
-shader_parameter/vignette_aspect_ratio = 1.9000000665
+shader_parameter/vignette_radius = 0.258000012255
+shader_parameter/vignette_softness = 0.5
+shader_parameter/vignette_aspect_ratio = 1.77
 shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
@@ -87,6 +106,12 @@ size = Vector3(10, 1.1164246, 17.719177)
 material = SubResource("StandardMaterial3D_xd7hw")
 metadata/_edit_lock_ = true
 
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Level" unique_id=1279842978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.398136, 1.6402786, -3.447289)
+material = SubResource("ShaderMaterial_584mt")
+script = ExtResource("5_hh2p4")
+desolve_speed = 0.2
+
 [node name="CharacterBody3D" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61112714, 1.7672446, 0.9762392)
 
@@ -108,6 +133,7 @@ shape = SubResource("CylinderShape3D_5k6if")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=130882804]
 material = SubResource("ShaderMaterial_ek6ti")
