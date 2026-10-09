@@ -1,4 +1,4 @@
-extends CSGPolygon3D
+extends CSGSphere3D
 
 var mat: ShaderMaterial
 @export var desolve_speed: float = 0.5

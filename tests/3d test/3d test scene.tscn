@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
 [ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/post-processing/grayScreen.gdshader" id="8_2uk5l"]
 [ext_resource type="Shader" uid="uid://blcxd3fiterd" path="res://assets/shaders/post-processing/vignette.gdshader" id="9_hp00h"]
+[ext_resource type="Shader" uid="uid://dkq5g0j34gfmi" path="res://assets/shaders/enemyDesintegration.gdshader" id="12_br0mo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
 shader = ExtResource("1_khnuh")
@@ -41,12 +42,14 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
 render_priority = 0
 shader = ExtResource("4_r165k")
-shader_parameter/dissolve_amount = 0.0
+shader_parameter/dissolve_amount = 0.4510000214225
+shader_parameter/dissolve_mode = 2
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_r165k")
-shader_parameter/edge_width = 0.1170000055575
+shader_parameter/noise_scale = 0.8170000150575
+shader_parameter/edge_width = 0.1070000050825
 shader_parameter/edge_color = Color(0.7866053, 0.43492922, 0, 1)
-shader_parameter/emission_energy = 54.930002561675
-shader_parameter/albedo = Color(0.99999994, 0.14666548, 0.14639562, 1)
+shader_parameter/emission_energy = 23.6230011220925
+shader_parameter/albedo = Color(0.8, 0.8, 0.8, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2fj"]
 transparency = 1
@@ -75,6 +78,36 @@ shader_parameter/vignette_radius = 0.258000012255
 shader_parameter/vignette_softness = 0.5
 shader_parameter/vignette_aspect_ratio = 1.77
 shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_us4t6"]
+seed = 51
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j3l4m"]
+noise = SubResource("FastNoiseLite_us4t6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_payxv"]
+render_priority = 0
+shader = ExtResource("12_br0mo")
+shader_parameter/dissolve_amount = 0.42800002033
+shader_parameter/dissolve_mode = 1
+shader_parameter/character_height = 1.822000062795
+shader_parameter/albedo_tint = Color(1, 1, 0, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_j3l4m")
+shader_parameter/noise_scale = 2.2370000825075
+shader_parameter/edge_width = 0.08800000418
+shader_parameter/edge_color = Color(1, 0, 0, 1)
+shader_parameter/emission_energy = 67.6690032142775
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_584mt"]
+material = SubResource("ShaderMaterial_payxv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek6ti"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_584mt"]
+material = SubResource("StandardMaterial3D_ek6ti")
+radius = 0.1
+height = 0.2
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
 
@@ -106,7 +139,7 @@ size = Vector3(10, 1.1164246, 17.719177)
 material = SubResource("StandardMaterial3D_xd7hw")
 metadata/_edit_lock_ = true
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Level" unique_id=1279842978]
+[node name="CSGPolygon3D" type="CSGSphere3D" parent="Level" unique_id=658890157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.398136, 1.6402786, -3.447289)
 material = SubResource("ShaderMaterial_584mt")
 script = ExtResource("5_hh2p4")
@@ -155,5 +188,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1340567503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1762042, 2.8030543, -5.596493)
+mesh = SubResource("CapsuleMesh_584mt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1636881939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27279544, 0.5722351, 0.39005995)
+mesh = SubResource("SphereMesh_584mt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=722435028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872086, 0.5722351, 0.39005995)
+mesh = SubResource("SphereMesh_584mt")
 
 [connection signal="interacted" from="Node3D/Interactable" to="Node3D" method="_on_interactable_interacted"]
