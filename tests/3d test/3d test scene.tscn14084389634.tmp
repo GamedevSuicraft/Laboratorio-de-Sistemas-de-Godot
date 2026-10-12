@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://l5nf68m1esmb"]
+
+[ext_resource type="Shader" uid="uid://dnclyexp54fhl" path="res://assets/shaders/basic_skyshader.gdshader" id="1_khnuh"]
+[ext_resource type="Script" uid="uid://bwgksf4sph6cy" path="res://tests/3d test/sceneScripts/3d_test_scene.gd" id="1_ql6ib"]
+[ext_resource type="Script" uid="uid://dvga0ijjjyy4y" path="res://components/interaction/3D/Interactable3D.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="1_xd7hw"]
+[ext_resource type="Texture2D" uid="uid://cbxy2c3ewfbbh" path="res://assets/textures/fuzzy_sky-blue_03-1024x512.png" id="2_khnuh"]
+[ext_resource type="PackedScene" uid="uid://cpy2hpdq7bpdf" path="res://tests/3d test/Player3D.tscn" id="3_5k6if"]
+[ext_resource type="Shader" uid="uid://d2kdvjtrh8ydx" path="res://assets/shaders/desintegration.gdshader" id="4_r165k"]
+[ext_resource type="Script" uid="uid://45dlkvydawkl" path="res://tests/3d test/sceneScripts/desintegratingCube.gd" id="5_hh2p4"]
+[ext_resource type="Script" uid="uid://os5xrw8s1568" path="res://tests/3d test/sceneScripts/node_3d.gd" id="5_khnuh"]
+[ext_resource type="AudioStream" uid="uid://qai5reqmsls0" path="res://assets/audio/SFX/explosion.mp3" id="6_payxv"]
+[ext_resource type="PackedScene" uid="uid://njvrqar7g48e" path="res://tests/3d test/Button.tscn" id="7_5k6if"]
+[ext_resource type="Shader" uid="uid://b5xwlt0yp5cr1" path="res://assets/shaders/post-processing/grayScreen.gdshader" id="8_2uk5l"]
+[ext_resource type="Shader" uid="uid://blcxd3fiterd" path="res://assets/shaders/post-processing/vignette.gdshader" id="9_hp00h"]
+[ext_resource type="Shader" uid="uid://dkq5g0j34gfmi" path="res://assets/shaders/enemyDesintegration.gdshader" id="12_br0mo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkwq4"]
+shader = ExtResource("1_khnuh")
+shader_parameter/sky_texture = ExtResource("2_khnuh")
+
+[sub_resource type="Sky" id="Sky_6v3ay"]
+sky_material = SubResource("ShaderMaterial_kkwq4")
+
+[sub_resource type="Environment" id="Environment_xd7hw"]
+background_mode = 2
+background_color = Color(0.9774429, 0.8364514, 0.8644167, 1)
+sky = SubResource("Sky_6v3ay")
+ambient_light_source = 3
+glow_enabled = true
+fog_light_color = Color(0.657358, 0.7846865, 0.9319059, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd7hw"]
+albedo_texture = ExtResource("1_xd7hw")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hh2p4"]
+seed = 16
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r165k"]
+noise = SubResource("FastNoiseLite_hh2p4")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
+render_priority = 0
+shader = ExtResource("4_r165k")
+shader_parameter/dissolve_amount = 0.4170000198075
+shader_parameter/dissolve_mode = 2
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_r165k")
+shader_parameter/noise_scale = 1.9830000704425
+shader_parameter/edge_width = 0.14000000665
+shader_parameter/edge_color = Color(0.98329526, 0.12184311, 5.7756904e-07, 1)
+shader_parameter/emission_energy = 51.5950024507625
+shader_parameter/albedo = Color(0.41344544, 0.21952346, 0.09938947, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2fj"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(2.887845e-06, 0.74367625, 0.9659397, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_khnuh"]
+material = SubResource("StandardMaterial3D_xm2fj")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5k6if"]
+height = 4.0
+radius = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek6ti"]
+shader = ExtResource("8_2uk5l")
+shader_parameter/select_grayscale_math_algorithm = 2
+shader_parameter/binarization_threshold_cutoff = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l4m"]
+shader = ExtResource("9_hp00h")
+shader_parameter/invert_vignette = false
+shader_parameter/vignette_radius = 0.258000012255
+shader_parameter/vignette_softness = 0.5
+shader_parameter/vignette_aspect_ratio = 1.77
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_us4t6"]
+seed = 51
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j3l4m"]
+noise = SubResource("FastNoiseLite_us4t6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_payxv"]
+render_priority = 0
+shader = ExtResource("12_br0mo")
+shader_parameter/dissolve_amount = 0.42000001995
+shader_parameter/dissolve_mode = 1
+shader_parameter/character_height = 2.0
+shader_parameter/albedo_tint = Color(1, 1, 0, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_j3l4m")
+shader_parameter/noise_scale = 2.2370000825075
+shader_parameter/edge_width = 0.08800000418
+shader_parameter/edge_color = Color(0.2711915, 0.6323745, 0, 1)
+shader_parameter/emission_energy = 100.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_584mt"]
+material = SubResource("ShaderMaterial_payxv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ek6ti"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_584mt"]
+material = SubResource("StandardMaterial3D_ek6ti")
+radius = 0.1
+height = 0.2
+
+[node name="3dTestScene" type="Node3D" unique_id=1874949410]
+script = ExtResource("1_ql6ib")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=772104936]
+environment = SubResource("Environment_xd7hw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1717799561]
+transform = Transform3D(-0.053561524, -0.8084216, 0.5861619, -0.073564395, 0.588604, 0.80506754, -0.9958511, 0, -0.09099758, 0, 4.073457, 0)
+
+[node name="Level" type="CSGCombiner3D" parent="." unique_id=10388013]
+use_collision = true
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level" unique_id=533850820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.869568, 0, -74.13499)
+size = Vector3(151.89001, 1, 197.24242)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level" unique_id=2099782610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.95084, 0.91134644, -5.7852173)
+size = Vector3(10, 2.8226929, 31.506714)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level" unique_id=70381534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.106113, 4.1677837, -0.29877377)
+size = Vector3(10, 1.1164246, 17.719177)
+material = SubResource("StandardMaterial3D_xd7hw")
+metadata/_edit_lock_ = true
+
+[node name="CSGPolygon3D" type="CSGSphere3D" parent="Level" unique_id=658890157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.398136, 1.6402786, -3.447289)
+material = SubResource("ShaderMaterial_584mt")
+script = ExtResource("5_hh2p4")
+explosion_sound = ExtResource("6_payxv")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level" unique_id=86508197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.44976, 1.2151093, -74.16594)
+size = Vector3(1, 2.4828491, 197.99246)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level" unique_id=1262382982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.47318, 1.2151093, -74.16594)
+size = Vector3(1, 2.4828491, 197.99246)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level" unique_id=1884173233]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 54.87429, 1.2151093, -171.99011)
+size = Vector3(1, 2.4828491, 151.07423)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Level" unique_id=781223079]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 54.87429, 1.2151093, 24.446327)
+size = Vector3(1, 2.4828491, 151.07423)
+
+[node name="CharacterBody3D" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61112714, 1.7672446, 0.9762392)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=735676089]
+script = ExtResource("5_khnuh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1555454270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
+mesh = SubResource("CylinderMesh_khnuh")
+
+[node name="Interactable3D" type="Area3D" parent="Node3D" unique_id=505660893]
+script = ExtResource("1_script")
+metadata/_custom_type_script = "uid://dvga0ijjjyy4y"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable3D" unique_id=604717282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
+shape = SubResource("CylinderShape3D_5k6if")
+
+[node name="Button" parent="." unique_id=589067763 instance=ExtResource("7_5k6if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
+visible = false
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=130882804]
+material = SubResource("ShaderMaterial_ek6ti")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=1146626867]
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1082339680]
+material = SubResource("ShaderMaterial_j3l4m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1340567503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1762042, 2.8030543, -5.596493)
+mesh = SubResource("CapsuleMesh_584mt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1636881939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27279544, 0.5722351, 0.39005995)
+mesh = SubResource("SphereMesh_584mt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=722435028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872086, 0.5722351, 0.39005995)
+mesh = SubResource("SphereMesh_584mt")
+
+[connection signal="interacted" from="Node3D/Interactable3D" to="Node3D" method="_on_interactable_3d_interacted"]

@@ -175,10 +175,11 @@ script = ExtResource("5_khnuh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
 mesh = SubResource("CylinderMesh_khnuh")
 
-[node name="Interactable" type="Area3D" parent="Node3D" unique_id=1919765328]
+[node name="Interactable3D" type="Area3D" parent="Node3D" unique_id=505660893]
 script = ExtResource("1_script")
+metadata/_custom_type_script = "uid://dvga0ijjjyy4y"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable" unique_id=604717282]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable3D" unique_id=604717282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
 shape = SubResource("CylinderShape3D_5k6if")
 
@@ -221,4 +222,4 @@ mesh = SubResource("SphereMesh_584mt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872086, 0.5722351, 0.39005995)
 mesh = SubResource("SphereMesh_584mt")
 
-[connection signal="interacted" from="Node3D/Interactable" to="Node3D" method="_on_interactable_interacted"]
+[connection signal="interacted" from="Node3D/Interactable3D" to="Node3D" method="_on_interactable_3d_interacted"]
