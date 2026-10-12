@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://njvrqar7g48e"]
 
+[ext_resource type="Script" uid="uid://bf1ck888fm1fp" path="res://tests/3d test/sceneScripts/buttonController.gd" id="1_c40dr"]
 [ext_resource type="Script" uid="uid://cegxg01yo4oox" path="res://systems/Button/3D/PressurePlate/PressurePlateLogic.gd" id="1_dwxgs"]
 [ext_resource type="Texture2D" uid="uid://dtisu7gpgbpxa" path="res://assets/textures/greybox_grey_grid.png" id="2_gjyge"]
 
@@ -28,6 +29,7 @@ material = SubResource("StandardMaterial3D_c40dr")
 size = Vector3(2.5, 0.3, 2.5)
 
 [node name="StaticBody3D" type="Node3D" unique_id=1262652029]
+script = ExtResource("1_c40dr")
 
 [node name="RigidBody3D" type="AnimatableBody3D" parent="." unique_id=772888904]
 
@@ -50,3 +52,6 @@ shape = SubResource("CylinderShape3D_r165k")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1030694784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34301114, 0)
 mesh = SubResource("BoxMesh_ek6ti")
+
+[connection signal="pressed" from="Area3D" to="." method="_on_area_3d_pressed"]
+[connection signal="released" from="Area3D" to="." method="_on_area_3d_released"]
