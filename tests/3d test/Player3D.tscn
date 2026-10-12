@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cpy2hpdq7bpdf"]
 
 [ext_resource type="Script" uid="uid://b5tv30cyvgx57" path="res://tests/3d test/sceneScripts/character_body_3d.gd" id="1_r3wmj"]
-[ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://assets/shaders/contour.gdshader" id="2_p7nrp"]
+[ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://shaders/contour.gdshader" id="2_p7nrp"]
 [ext_resource type="Script" uid="uid://d22hs1yfykuqg" path="res://components/movement/3D/Platformer/VelocityComponent3D.gd" id="3_script"]
 [ext_resource type="Script" uid="uid://bcepvku1bq46f" path="res://components/interaction/3D/Interactor3D.gd" id="4_script"]
 [ext_resource type="PackedScene" uid="uid://dtnncs47gb08a" path="res://systems/Camera/3D/ThirdPersonCamera/ThirdPersonCamera.tscn" id="5_lu84o"]
