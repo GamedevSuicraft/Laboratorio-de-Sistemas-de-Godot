@@ -28,8 +28,10 @@ albedo_texture = ExtResource("2_gjyge")
 material = SubResource("StandardMaterial3D_c40dr")
 size = Vector3(2.5, 0.3, 2.5)
 
-[node name="StaticBody3D" type="Node3D" unique_id=1262652029]
+[node name="StaticBody3D" type="Node3D" unique_id=1262652029 node_paths=PackedStringArray("mesh_to_animate")]
 script = ExtResource("1_c40dr")
+mesh_to_animate = NodePath("RigidBody3D")
+press_offset = Vector3(0, -5, 0)
 
 [node name="RigidBody3D" type="AnimatableBody3D" parent="." unique_id=772888904]
 
@@ -41,10 +43,9 @@ shape = SubResource("CylinderShape3D_2uk5l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0014006495, 0)
 mesh = SubResource("CylinderMesh_hp00h")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=2132192617 node_paths=PackedStringArray("target_node")]
+[node name="Area3D" type="Area3D" parent="." unique_id=2132192617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11198801, 0)
 script = ExtResource("1_dwxgs")
-target_node = NodePath("../RigidBody3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1708317946]
 shape = SubResource("CylinderShape3D_r165k")
@@ -53,5 +54,5 @@ shape = SubResource("CylinderShape3D_r165k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.34301114, 0)
 mesh = SubResource("BoxMesh_ek6ti")
 
-[connection signal="pressed" from="Area3D" to="." method="_on_area_3d_pressed"]
-[connection signal="released" from="Area3D" to="." method="_on_area_3d_released"]
+[connection signal="pressed" from="Area3D" to="." method="_on_pressure_plate_pressed"]
+[connection signal="released" from="Area3D" to="." method="_on_pressure_plate_released"]

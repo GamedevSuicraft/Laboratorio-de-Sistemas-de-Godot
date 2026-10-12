@@ -5,7 +5,7 @@
 ## 1. Create a custom Resource class (e.g. extending Resource) and declare your stats as @export variables.
 ## 2. Assign an instance of this resource to 'stats_resource' in the inspector.
 ## 3. Retrieve final stats with get_stat(), which calculates base_value + active_modifiers.
-@icon("./icons/status.svg")
+@icon("./icons/attributes.svg")
 class_name AttributesComponent extends Node
 
 signal stat_changed(stat_name: String, base_value: float, final_value: float)

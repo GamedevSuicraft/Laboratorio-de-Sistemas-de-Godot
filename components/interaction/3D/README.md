@@ -39,8 +39,8 @@ An `Area3D` placed on an interactive world object (e.g. shrine, door, button, lo
 extends Node3D
 
 func _on_interactable_interacted(player: Node) -> void:
-    print("Interacted with by: ", player.name)
-    queue_free() # Destroys or activates the object
+	print("Interacted with by: ", player.name)
+	queue_free() # Destroys or activates the object
 ```
 
 ### On the Player (`Player3D.tscn` & `character_body_3d.gd`)
@@ -52,6 +52,6 @@ extends CharacterBody3D
 @export var interactor: Interactor3D
 
 func _unhandled_input(event: InputEvent) -> void:
-    if event.is_action_pressed("interact"):
-        interactor.try_interaction(self)
+	if event.is_action_pressed("interact"):
+		interactor.try_interaction(self)
 ```

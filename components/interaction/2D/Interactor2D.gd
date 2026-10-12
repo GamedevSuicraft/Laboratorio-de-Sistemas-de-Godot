@@ -22,8 +22,8 @@ func _process(_delta: float) -> void:
 			
 		_current_focus = target
 		
-	if _current_focus and _current_focus.is_in_group("Interactable"):
-		focused_interactable.emit(_current_focus)
+		if _current_focus and _current_focus is Interactable2D:
+			focused_interactable.emit(_current_focus)
 
 
 func try_interaction(player: Node):

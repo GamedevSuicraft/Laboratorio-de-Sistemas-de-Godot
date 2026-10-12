@@ -185,6 +185,7 @@ shape = SubResource("CylinderShape3D_5k6if")
 
 [node name="Button" parent="." unique_id=589067763 instance=ExtResource("7_5k6if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
+press_offset = Vector3(0, -0.5, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
 visible = false
