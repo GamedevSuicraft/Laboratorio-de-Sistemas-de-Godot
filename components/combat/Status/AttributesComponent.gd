@@ -6,7 +6,7 @@
 ## 2. Assign an instance of this resource to 'stats_resource' in the inspector.
 ## 3. Retrieve final stats with get_stat(), which calculates base_value + active_modifiers.
 @icon("./icons/status.svg")
-class_name StatusComponent extends Node
+class_name AttributesComponent extends Node
 
 signal stat_changed(stat_name: String, base_value: float, final_value: float)
 
@@ -31,32 +31,32 @@ func _initialize_base_stats() -> void:
 	
 	for prop in stats_resource.get_property_list():
 		if prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			var stat_name = prop.name
-			base_stats[stat_name] = stats_resource.get(stat_name)
+			var stat_name: String = prop.name
+			base_stats[stat_name] = float(stats_resource.get(stat_name))
 
 
 ## Returns the final value of a stat, combining its base value and any active modifiers.
 func get_stat(stat_name: String) -> float:
-	var base = base_stats.get(stat_name, 0.0)
-	var mod_sum = 0.0
+	var base: float = float(base_stats.get(stat_name, 0.0))
+	var mod_sum: float = 0.0
 	if _modifiers.has(stat_name):
 		for mod_val in _modifiers[stat_name].values():
-			mod_sum += mod_val
+			mod_sum += float(mod_val)
 	return base + mod_sum
 
 
 ## Updates the base value of a stat (e.g. from level ups).
-func set_base_stat(stat_name: String, value: int) -> void:
+func set_base_stat(stat_name: String, value: float) -> void:
 	base_stats[stat_name] = value
 	stat_changed.emit(stat_name, value, get_stat(stat_name))
 
 
 ## Adds or updates a modifier to a stat (e.g. from weapons, armor, status effects).
-func add_modifier(stat_name: String, modifier_id: String, value: int) -> void:
+func add_modifier(stat_name: String, modifier_id: String, value: float) -> void:
 	if not _modifiers.has(stat_name):
 		_modifiers[stat_name] = {}
 	_modifiers[stat_name][modifier_id] = value
-	stat_changed.emit(stat_name, base_stats.get(stat_name, 0.0), get_stat(stat_name))
+	stat_changed.emit(stat_name, float(base_stats.get(stat_name, 0.0)), get_stat(stat_name))
 
 
 ## Removes a modifier from a stat.
@@ -65,4 +65,4 @@ func remove_modifier(stat_name: String, modifier_id: String) -> void:
 		_modifiers[stat_name].erase(modifier_id)
 		if _modifiers[stat_name].is_empty():
 			_modifiers.erase(stat_name)
-		stat_changed.emit(stat_name, base_stats.get(stat_name, 0.0), get_stat(stat_name))
+		stat_changed.emit(stat_name, float(base_stats.get(stat_name, 0.0)), get_stat(stat_name))

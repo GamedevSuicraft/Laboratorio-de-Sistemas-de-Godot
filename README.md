@@ -56,8 +56,7 @@ The library is built following strict Godot 4 architectural standards:
 | :--- | :--- | :--- | :--- |
 | [`HealthComponent`](components/combat/Status/README.md) | `Node` | Manages HP, taking damage, healing, and death signals. | Unused in tests (documented) |
 | [`ResourceComponent`](components/combat/Status/README.md) | `Node` | Dynamic resource pool (Stamina, Mana, Energy) with auto-regen & cooldowns. | `tests/3d test/Player3D.tscn` |
-| [`StatsComponent`](components/combat/Status/README.md) | `Node` | Basic RPG stats (Armor, Magic Resist, Penetration) with dynamic modifiers. | Combat systems |
-| [`StatusComponent`](components/combat/Status/README.md) | `Node` | Dynamic attribute system driven by custom `Resource` definitions. | Combat systems |
+| [`AttributesComponent`](components/combat/Status/README.md#3-attributescomponent-attributescomponentgd) | `Node` | Dynamic attribute system driven by custom `Resource` definitions with modifier calculations. | Combat & RPG systems |
 | [`StatusEffectManager`](components/combat/StatusEffects/README.md) | `Node` | Ticks and expires timed effects defined by [`StatusEffect`](components/combat/StatusEffects/README.md) resources. | `tests/2d test/statusEffects/burn.tres` |
 | [`Interactable2D`](components/interaction/2D/README.md) | `Area2D` | Marks a 2D object as interactable and emits `interacted(player)`. | `tests/2d test/chest.tscn` |
 | [`Interactor2D`](components/interaction/2D/README.md) | `RayCast2D` | Player raycast detecting interactables and triggering interaction on key press. | `tests/2d test/player.tscn` |

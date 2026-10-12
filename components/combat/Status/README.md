@@ -1,6 +1,6 @@
 # Status & Attribute Components
 
-This folder contains components for handling health, regenerative energy/stamina resources, combat defense stats, and resource-driven attributes.
+This folder contains components for handling health, regenerative energy/stamina resources, and dynamic, resource-driven attributes.
 
 ---
 
@@ -69,37 +69,45 @@ func _physics_process(delta: float) -> void:
 
 ---
 
-## 3. `StatsComponent` (`StatsComponent.gd`)
+## 3. `AttributesComponent` (`AttributesComponent.gd`)
 
-Stores base RPG combat stats (`armor`, `magic_resist`, `penetration`) and calculates dynamic modifier bonuses.
+A data-driven, modular attributes component where stats are defined in a custom Godot `Resource` (such as `examples/ExampleStatus.gd`).
+
+Supports base stat modification and named temporary or permanent additive modifiers (from equipment, spells, status effects, or level-ups).
+
+### Inspector Properties
+* `stats_resource: Resource`: The resource defining your character's base stats as `@export var` fields.
+
+### Signals
+* `stat_changed(stat_name: String, base_value: float, final_value: float)`
 
 ### Methods
-* `add_modifier(stat_name: StringName, id: String, value: float) -> void`: Adds or overwrites a named modifier.
-* `remove_modifier(stat_name: StringName, id: String) -> void`: Removes a specific modifier by ID.
-* `get_modified_value(stat_name: StringName) -> float`: Returns `base_value + sum_of_modifiers`.
+* `get_stat(stat_name: String) -> float`: Calculates and returns `base_value + sum_of_active_modifiers`.
+* `set_base_stat(stat_name: String, value: float) -> void`: Updates the base stat value and emits `stat_changed`.
+* `add_modifier(stat_name: String, modifier_id: String, value: float) -> void`: Adds or overwrites a named modifier and emits `stat_changed`.
+* `remove_modifier(stat_name: String, modifier_id: String) -> void`: Removes a named modifier and emits `stat_changed`.
 
-### Usage Example
-```gdscript
-stats.add_modifier(&"armor", "iron_shield", 15.0)
-var effective_armor = stats.get_modified_value(&"armor")
-```
-
----
-
-## 4. `StatusComponent` (`StatusComponent.gd`)
-
-A data-driven attribute component where stats are defined in a custom Godot `Resource` (such as `examples/ExampleStatus.gd`).
-
-### Setup
-1. Create a script extending `Resource`:
+### Setup & Usage Example
+1. Define your game's attributes in a custom `Resource` script (e.g., `CharacterStats.gd`):
    ```gdscript
-   class_name CharacterStatsResource extends Resource
-   @export var strength: int = 10
-   @export var agility: int = 8
+   class_name CharacterStats extends Resource
+   
+   @export var armor: float = 20.0
+   @export var magic_resist: float = 10.0
+   @export var speed: float = 200.0
    ```
-2. Assign the `.tres` file to `stats_resource` on `StatusComponent`.
-3. Read or modify values dynamically:
+2. Create an instance of this resource (`.tres`) and assign it to `stats_resource` on `AttributesComponent`.
+3. Query or apply modifiers in code:
    ```gdscript
-   status_component.add_modifier("strength", "buff_spell", 5)
-   var total_strength = status_component.get_stat("strength") # 15
+   @onready var attributes: AttributesComponent = $AttributesComponent
+
+   func _ready() -> void:
+       # Read total stat
+       var total_armor = attributes.get_stat("armor")
+       
+       # Add an equipment or buff modifier (+15.0 armor from shield)
+       attributes.add_modifier("armor", "iron_shield", 15.0)
+       
+       # Remove modifier when shield is unequipped
+       attributes.remove_modifier("armor", "iron_shield")
    ```

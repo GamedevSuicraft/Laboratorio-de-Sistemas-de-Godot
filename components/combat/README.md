@@ -11,8 +11,7 @@ These components are agnostic to the dimension (they work seamlessly on both 2D 
 * [`Status/`](Status/README.md):
   * `HealthComponent.gd`: Health management (damage, heal, death).
   * `ResourceComponent.gd`: Dynamic pool (stamina, mana) with auto-regeneration. Used in `tests/3d test/Player3D.tscn`.
-  * `StatsComponent.gd`: Hardcoded combat stats (armor, magic resist, penetration) with dynamic modifiers.
-  * `StatusComponent.gd`: Extensible stats system driven by custom `Resource` definitions.
+  * `AttributesComponent.gd`: Dynamic, data-driven attributes system driven by custom `Resource` definitions with support for additive modifiers.
 * [`StatusEffects/`](StatusEffects/README.md):
   * `StatusEffect.gd`: Resource blueprint for defining effects (tick rate, duration).
   * `StatusEffectManager.gd`: Node manager that handles effect lifecycles, ticks, and expiration.
