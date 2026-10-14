@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cyafsygj5kabn"]
+
+[ext_resource type="Script" uid="uid://b7c5t2c8rr1n" path="res://components/projectile/Projectile3D.gd" id="1_u02q3"]
+[ext_resource type="Shader" uid="uid://d2kdvjtrh8ydx" path="res://shaders/VFX/desintegration.gdshader" id="2_kt6xs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ek6ti"]
+width = 1024
+height = 1024
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvq1t"]
+render_priority = 0
+shader = ExtResource("2_kt6xs")
+shader_parameter/dissolve_amount = 0.454000021565
+shader_parameter/dissolve_mode = 2
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ek6ti")
+shader_parameter/noise_scale = 2.5050000952375
+shader_parameter/edge_width = 0.5
+shader_parameter/edge_color = Color(0.5120954, 0.08325403, 9.62615e-08, 1)
+shader_parameter/emission_energy = 100.0
+shader_parameter/albedo = Color(0.6809851, 0, 0.13764429, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_584mt"]
+material = SubResource("ShaderMaterial_dvq1t")
+height = 2.0
+
+[node name="Fireball" type="Node3D" unique_id=2137324028]
+script = ExtResource("1_u02q3")
+metadata/_custom_type_script = "uid://b7c5t2c8rr1n"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=381740421]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_584mt")
