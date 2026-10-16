@@ -19,6 +19,7 @@
 [ext_resource type="Shader" uid="uid://dfb3n1pg7spec" path="res://shaders/aestetics/contour.gdshader" id="12_ql6ib"]
 [ext_resource type="Shader" uid="uid://btb2qctgvwjfe" path="res://shaders/post-processing/cromaticAberration.gdshader" id="14_fjxbr"]
 [ext_resource type="Shader" uid="uid://blcxd3fiterd" path="res://shaders/post-processing/vignette.gdshader" id="15_58a8j"]
+[ext_resource type="Shader" uid="uid://crv442fv6dfps" path="res://shaders/VFX/SpiralTrail.gdshader" id="18_8mg86"]
 [ext_resource type="PackedScene" uid="uid://cyafsygj5kabn" path="res://tests/3d test/Fireball.tscn" id="20_of81s"]
 [ext_resource type="Shader" uid="uid://hr50ik2oywxy" path="res://shaders/VFX/summonerAura.gdshader" id="21_7kgxk"]
 
@@ -439,6 +440,36 @@ shader_parameter/wave_intensity = 1.30000001937156
 material = SubResource("ShaderMaterial_lplhn")
 size = Vector2(8, 8)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y77n2"]
+render_priority = 0
+shader = ExtResource("18_8mg86")
+shader_parameter/albedo_color = Color(0.24705882, 0.49411765, 0.33333334, 0.24705882)
+shader_parameter/emission_energy = 100.0
+shader_parameter/effect_texture = ExtResource("5_r3u1x")
+shader_parameter/texture_scale = Vector2(20, 0.3)
+shader_parameter/cap_cutoff_threshold = 0.85
+shader_parameter/remap_godot_cylinder_uv = true
+shader_parameter/strand_count = 3
+shader_parameter/spiral_twist = 2.3000001832847605
+shader_parameter/strand_thickness = 0.9199999794361601
+shader_parameter/strand_softness = 0.15
+shader_parameter/vertical_speed = 0.30000015348236
+shader_parameter/rotation_speed = 2.0000001788143997
+shader_parameter/pulses_per_turn = 1
+shader_parameter/trail_length = 1.0
+shader_parameter/trail_fade = 0.3
+shader_parameter/end_fade_start = 0.5
+shader_parameter/end_opacity = 0.0
+shader_parameter/invert_end_fade_direction = false
+shader_parameter/border_softness = 0.05
+shader_parameter/silhouette_softness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7q1dn"]
+material = SubResource("ShaderMaterial_y77n2")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 4.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ek6ti"]
 shader = ExtResource("8_2uk5l")
 shader_parameter/select_grayscale_math_algorithm = 1
@@ -573,6 +604,10 @@ mesh = SubResource("PlaneMesh_584mt")
 [node name="FloorVFX2" type="MeshInstance3D" parent="SceneElements" unique_id=1792708073]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.786664, 0.51827097, 5.3000317)
 mesh = SubResource("PlaneMesh_ek6ti")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneElements" unique_id=538823865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.892853, 2.4489043, 5.2857156)
+mesh = SubResource("CylinderMesh_7q1dn")
 
 [node name="Player" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3477135, 1.7672446, 6.9415445)
