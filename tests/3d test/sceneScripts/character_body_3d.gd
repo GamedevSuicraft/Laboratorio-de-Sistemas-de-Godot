@@ -5,11 +5,17 @@ extends CharacterBody3D
 @export var sprint_speed := 20.0
 @export var running_stamina_cost: float = 10.0
 
-@export_group("References")
-@export var movement: VelocityComponent3D
-@export var interactor: Interactor3D
-@export var camera_pivot: ThirdPersonCamera
-@export var stamina: ResourceComponent
+var movement: VelocityComponent3D
+var interactor: Interactor3D
+var camera_pivot: ThirdPersonCamera
+var stamina: ResourceComponent
+
+
+func _ready() -> void:
+	movement     = $MovementComponent
+	interactor   = $Interactor
+	camera_pivot = $Camera
+	stamina      = $Stamina
 
 
 func _physics_process(delta: float) -> void:

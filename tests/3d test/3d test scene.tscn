@@ -69,6 +69,30 @@ ambient_light_source = 3
 glow_enabled = true
 fog_light_color = Color(0.657358, 0.7846865, 0.9319059, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd7hw"]
+albedo_texture = ExtResource("1_xd7hw")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hh2p4"]
+seed = 16
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r165k"]
+noise = SubResource("FastNoiseLite_hh2p4")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
+render_priority = 0
+shader = ExtResource("4_r165k")
+shader_parameter/dissolve_amount = 0.4170000198075
+shader_parameter/dissolve_mode = 2
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_r165k")
+shader_parameter/noise_scale = 1.9630000694925
+shader_parameter/edge_width = 0.1670000079325
+shader_parameter/edge_color = Color(0.98329526, 0.12184311, 5.7756904e-07, 1)
+shader_parameter/emission_energy = 58.2610027673975
+shader_parameter/albedo = Color(0.41344544, 0.21952346, 0.09938947, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_of81s"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qjse2"]
@@ -98,30 +122,6 @@ shader_parameter/dissolve_edge_color = Color(5.7756904e-07, 0.7248893, 0.8594162
 shader_parameter/pulse_speed = 4.80000007152576
 shader_parameter/pulse_amplitude = 0.05999999865888
 shader_parameter/pulse_frequency = 4.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xd7hw"]
-albedo_texture = ExtResource("1_xd7hw")
-uv1_scale = Vector3(10, 10, 10)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hh2p4"]
-seed = 16
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r165k"]
-noise = SubResource("FastNoiseLite_hh2p4")
-seamless = true
-as_normal_map = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_584mt"]
-render_priority = 0
-shader = ExtResource("4_r165k")
-shader_parameter/dissolve_amount = 0.4170000198075
-shader_parameter/dissolve_mode = 2
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_r165k")
-shader_parameter/noise_scale = 1.9630000694925
-shader_parameter/edge_width = 0.1670000079325
-shader_parameter/edge_color = Color(0.98329526, 0.12184311, 5.7756904e-07, 1)
-shader_parameter/emission_energy = 58.2610027673975
-shader_parameter/albedo = Color(0.41344544, 0.21952346, 0.09938947, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm2fj"]
 transparency = 1
@@ -174,31 +174,6 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_ek6ti")
 radius = 0.1
 height = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek6ti"]
-shader = ExtResource("8_2uk5l")
-shader_parameter/select_grayscale_math_algorithm = 1
-shader_parameter/binarization_threshold_cutoff = 0.638000030305
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l4m"]
-shader = ExtResource("15_58a8j")
-shader_parameter/invert_vignette = false
-shader_parameter/vignette_radius = 0.134000006365
-shader_parameter/vignette_softness = 1.158000055005
-shader_parameter/vignette_aspect_ratio = 1.298000037905
-shader_parameter/vignette_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_us4t6"]
-shader = ExtResource("14_fjxbr")
-shader_parameter/strength = 0.0050000002375
-shader_parameter/angle_degrees = 124.52800591508
-shader_parameter/red_shift = 1.0
-shader_parameter/green_shift = 0.0
-shader_parameter/blue_shift = -1.0
-shader_parameter/pulse_speed = 3.7250001769375
-shader_parameter/pulse_depth = 0.5
-shader_parameter/mask_mode = 0
-shader_parameter/mask_falloff = 2.0
 
 [sub_resource type="Shader" id="Shader_7kgxk"]
 code = "shader_type spatial;
@@ -431,6 +406,12 @@ shader_parameter/wave_intensity = 1.55000002309686
 material = SubResource("ShaderMaterial_g3qh8")
 size = Vector2(8, 8)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7kgxk"]
+load_path = "res://.godot/imported/texture.webp-05a6d7f7875579f23dcf64b3723d2829.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g3qh8"]
+load_path = "res://.godot/imported/texture.webp-05a6d7f7875579f23dcf64b3723d2829.s3tc.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lplhn"]
 render_priority = 0
 shader = ExtResource("21_7kgxk")
@@ -442,13 +423,13 @@ shader_parameter/spawn_flash = 0.0
 shader_parameter/outer_radius = 0.48
 shader_parameter/border_width = 0.11499999742952
 shader_parameter/border_softness = 0.08000000380000001
-shader_parameter/border_texture = ExtResource("5_r3u1x")
+shader_parameter/border_texture = SubResource("CompressedTexture2D_7kgxk")
 shader_parameter/border_texture_tiling = Vector2(12, 1)
 shader_parameter/border_scroll_speed = 0.5
 shader_parameter/border_texture_strength = 1.0
-shader_parameter/wave_texture = ExtResource("5_r3u1x")
+shader_parameter/wave_texture = SubResource("CompressedTexture2D_g3qh8")
 shader_parameter/expansion_speed = 0.55000000819566
-shader_parameter/wave_rotation_speed = 0.40000005066407995
+shader_parameter/wave_rotation_speed = 0.4000000506640799
 shader_parameter/min_wave_scale = 1.0
 shader_parameter/max_wave_scale = 1.7500000186265
 shader_parameter/enable_dual_wave = true
@@ -457,6 +438,31 @@ shader_parameter/wave_intensity = 1.30000001937156
 [sub_resource type="PlaneMesh" id="PlaneMesh_ek6ti"]
 material = SubResource("ShaderMaterial_lplhn")
 size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek6ti"]
+shader = ExtResource("8_2uk5l")
+shader_parameter/select_grayscale_math_algorithm = 1
+shader_parameter/binarization_threshold_cutoff = 0.638000030305
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3l4m"]
+shader = ExtResource("15_58a8j")
+shader_parameter/invert_vignette = false
+shader_parameter/vignette_radius = 0.134000006365
+shader_parameter/vignette_softness = 1.158000055005
+shader_parameter/vignette_aspect_ratio = 1.298000037905
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_us4t6"]
+shader = ExtResource("14_fjxbr")
+shader_parameter/strength = 0.0050000002375
+shader_parameter/angle_degrees = 124.52800591508
+shader_parameter/red_shift = 1.0
+shader_parameter/green_shift = 0.0
+shader_parameter/blue_shift = -1.0
+shader_parameter/pulse_speed = 3.7250001769375
+shader_parameter/pulse_depth = 0.5
+shader_parameter/mask_mode = 0
+shader_parameter/mask_falloff = 2.0
 
 [node name="3dTestScene" type="Node3D" unique_id=1874949410]
 script = ExtResource("1_ql6ib")
@@ -469,13 +475,6 @@ transform = Transform3D(1, 0, 0, 0, 0.094108306, 0.9955619, 0, -0.99556196, 0.09
 script = ExtResource("4_qjse2")
 world_environment = NodePath("../WorldEnvironment")
 enable_day_cycle = false
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=467529466]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0749516, -45.36548)
-radius = 9.0
-radial_segments = 32
-rings = 16
-material = SubResource("ShaderMaterial_fjxbr")
 
 [node name="Level" type="CSGCombiner3D" parent="." unique_id=10388013]
 use_collision = true
@@ -499,14 +498,6 @@ size = Vector3(10, 1.1164246, 17.719177)
 material = SubResource("StandardMaterial3D_xd7hw")
 metadata/_edit_lock_ = true
 
-[node name="DesintegrateSphere" type="CSGSphere3D" parent="Level" unique_id=658890157]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.398136, 2.919974, -3.447289)
-radius = 2.214
-material = SubResource("ShaderMaterial_584mt")
-script = ExtResource("5_hh2p4")
-desolve_speed = 0.2
-explosion_sound = ExtResource("6_payxv")
-
 [node name="CSGBox3D4" type="CSGBox3D" parent="Level" unique_id=86508197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.44976, 1.2151093, -74.16594)
 size = Vector3(1, 2.4828491, 197.99246)
@@ -523,46 +514,70 @@ size = Vector3(1, 2.4828491, 151.07423)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 54.87429, 1.2151093, 24.446327)
 size = Vector3(1, 2.4828491, 151.07423)
 
-[node name="CharacterBody3D" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3477135, 1.7672446, 6.9415445)
+[node name="DesintegrateSphere" type="CSGSphere3D" parent="Level" unique_id=658890157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.398136, 2.919974, -3.447289)
+radius = 2.214
+material = SubResource("ShaderMaterial_584mt")
+script = ExtResource("5_hh2p4")
+desolve_speed = 0.2
+explosion_sound = ExtResource("6_payxv")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=735676089]
+[node name="SceneElements" type="Node" parent="." unique_id=824281790]
+
+[node name="ManaSphere" type="CSGSphere3D" parent="SceneElements" unique_id=467529466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0749516, -45.36548)
+radius = 9.0
+radial_segments = 32
+rings = 16
+material = SubResource("ShaderMaterial_fjxbr")
+
+[node name="InteractionZone" type="Node3D" parent="SceneElements" unique_id=735676089]
 script = ExtResource("5_khnuh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1555454270]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneElements/InteractionZone" unique_id=1555454270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("CylinderMesh_khnuh")
 
-[node name="Interactable3D" type="Area3D" parent="Node3D" unique_id=505660893]
+[node name="Interactable3D" type="Area3D" parent="SceneElements/InteractionZone" unique_id=505660893]
 script = ExtResource("1_script")
 metadata/_custom_type_script = "uid://dvga0ijjjyy4y"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Interactable3D" unique_id=604717282]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6530895, 2.0783334, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneElements/InteractionZone/Interactable3D" unique_id=604717282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_5k6if")
 
-[node name="Button" parent="." unique_id=589067763 instance=ExtResource("7_5k6if")]
+[node name="Button" parent="SceneElements" unique_id=589067763 instance=ExtResource("7_5k6if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412706, 0.94437623, -5.295821)
 press_offset = Vector3(0, -0.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1340567503]
+[node name="Ghost" type="MeshInstance3D" parent="SceneElements" unique_id=1340567503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1762042, 2.8030543, -5.596493)
 mesh = SubResource("CapsuleMesh_584mt")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1636881939]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneElements/Ghost" unique_id=1636881939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27279544, 0.5722351, 0.39005995)
 mesh = SubResource("SphereMesh_584mt")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=722435028]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SceneElements/Ghost" unique_id=722435028]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27872086, 0.5722351, 0.39005995)
 mesh = SubResource("SphereMesh_584mt")
 
-[node name="Fireball" parent="." unique_id=2137324028 instance=ExtResource("20_of81s")]
+[node name="Fireball" parent="SceneElements" unique_id=2137324028 instance=ExtResource("20_of81s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.975483, 2.7955353, 10.12845)
 speed = 11.5
 
+[node name="FloorVFX1" type="MeshInstance3D" parent="SceneElements" unique_id=1051894380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.519209, 0.57113504, 14.634178)
+mesh = SubResource("PlaneMesh_584mt")
+
+[node name="FloorVFX2" type="MeshInstance3D" parent="SceneElements" unique_id=1792708073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.786664, 0.51827097, 5.3000317)
+mesh = SubResource("PlaneMesh_ek6ti")
+
+[node name="Player" parent="." unique_id=470733278 instance=ExtResource("3_5k6if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3477135, 1.7672446, 6.9415445)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1954172218]
-visible = false
 
 [node name="B&W" type="ColorRect" parent="CanvasLayer" unique_id=130882804]
 material = SubResource("ShaderMaterial_ek6ti")
@@ -589,6 +604,7 @@ mouse_filter = 2
 copy_mode = 2
 
 [node name="CromaticAberration" type="ColorRect" parent="CanvasLayer" unique_id=534026417]
+visible = false
 material = SubResource("ShaderMaterial_us4t6")
 anchors_preset = 15
 anchor_right = 1.0
@@ -597,12 +613,4 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1051894380]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.519209, 0.57113504, 14.634178)
-mesh = SubResource("PlaneMesh_584mt")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1792708073]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.786664, 0.51827097, 5.3000317)
-mesh = SubResource("PlaneMesh_ek6ti")
-
-[connection signal="interacted" from="Node3D/Interactable3D" to="Node3D" method="_on_interactable_3d_interacted"]
+[connection signal="interacted" from="SceneElements/InteractionZone/Interactable3D" to="SceneElements/InteractionZone" method="_on_interactable_3d_interacted"]
